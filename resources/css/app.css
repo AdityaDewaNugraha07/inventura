@@ -148,3 +148,106 @@
 .liquid-hover-sheen:hover::after {
     transform: translateX(120%);
 }
+
+/* ==================== INVENTURA STANDING LAMP LOGIN ==================== */
+.lamp-room {
+    background: radial-gradient(circle at 30% 25%, #051619 0%, #02090b 60%, #010506 100%);
+    transition: background 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.lamp-room.is-lit {
+    background:
+        radial-gradient(circle at 28% 35%, rgba(20, 184, 166, 0.22) 0%, rgba(16, 185, 129, 0.08) 38%, transparent 70%),
+        radial-gradient(circle at 75% 50%, rgba(13, 148, 136, 0.14) 0%, transparent 60%),
+        linear-gradient(145deg, #031518 0%, #020c0e 55%, #02080a 100%);
+}
+
+/* Pancaran kerucut cahaya & glow bohlam */
+.lamp-light-cone,
+.lamp-bulb-glow,
+.lamp-floor-glow,
+.lamp-shade-inner-glow {
+    opacity: 0;
+    transition: opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.lamp-room.is-lit .lamp-light-cone {
+    opacity: 1;
+}
+
+.lamp-room.is-lit .lamp-bulb-glow {
+    opacity: 1;
+    filter: drop-shadow(0 0 18px rgba(94, 234, 212, 0.95));
+}
+
+.lamp-room.is-lit .lamp-floor-glow {
+    opacity: 0.95;
+}
+
+.lamp-room.is-lit .lamp-shade-inner-glow {
+    opacity: 1;
+}
+
+/* Kunang-kunang Emerald-Teal melayang saat lampu menyala */
+.lamp-firefly {
+    position: absolute;
+    border-radius: 9999px;
+    background: radial-gradient(circle, #ccfbf1 0%, #2dd4bf 45%, transparent 75%);
+    box-shadow: 0 0 12px rgba(45, 212, 191, 0.85);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.8s ease;
+    animation: inventuraFloat var(--dur, 7s) ease-in-out var(--delay, 0s) infinite;
+}
+
+.lamp-room.is-lit .lamp-firefly {
+    opacity: var(--max-op, 0.7);
+}
+
+@keyframes inventuraFloat {
+    0%, 100% {
+        transform: translate3d(0, 0, 0) scale(0.85);
+    }
+    50% {
+        transform: translate3d(var(--tx, 14px), var(--ty, -28px), 0) scale(1.2);
+    }
+}
+
+/* Pulse halus pada bandul saklar saat ruangan masih gelap */
+.cord-hint-ring {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: cordPulse 2.2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.lamp-room.is-lit .cord-hint-ring {
+    opacity: 0;
+    animation: none;
+}
+
+@keyframes cordPulse {
+    0% {
+        transform: scale(0.9);
+        opacity: 0.75;
+    }
+    70% {
+        transform: scale(2.1);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(2.1);
+        opacity: 0;
+    }
+}
+
+.lamp-room {
+    overscroll-behavior: none;
+}
+
+.lamp-svg-interactive,
+.lamp-svg-interactive * {
+    touch-action: none;
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+}
