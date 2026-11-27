@@ -1,8 +1,8 @@
 <div
     x-data="inventuraLampLogin(@js($errors->any() || session()->has('error')))"
     :class="isOn ? 'is-lit overflow-y-auto lg:overflow-hidden' : 'overflow-hidden'"
-    class="lamp-room relative h-dvh w-full flex flex-col justify-center px-4 py-4 sm:px-8"
->
+    class="lamp-room relative h-dvh w-full flex flex-col justify-center px-4 py-4 sm:px-8">
+    
     <!-- Lapisan Kunang-Kunang Emerald-Teal -->
     <div wire:ignore x-ref="fireflies" class="pointer-events-none fixed inset-0 z-0 overflow-hidden"></div>
 
